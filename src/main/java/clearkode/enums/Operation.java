@@ -7,7 +7,9 @@ public enum Operation {
 
     DIRECT("DIRECT"),
     REFUND("REFUND"),
-    STORED("STORED");
+    STORED("STORED"),
+    THREED("3D"),
+    THREEDAUTH("3DAUTH");
 
     private final String text;
 

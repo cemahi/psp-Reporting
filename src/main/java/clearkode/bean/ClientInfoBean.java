@@ -28,7 +28,6 @@ public class ClientInfoBean {
     @PostConstruct
     public void init() {
         requestDTO = new ClientInfoRequest();
-        requestDTO.setTransactionId("1011028-1539357144-1293");
     }
 
     public void inquiry() {

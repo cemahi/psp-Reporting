@@ -26,8 +26,6 @@ public class LoginBean {
     @PostConstruct
     public void init() {
         user = new User();
-        user.setEmail("demo@financialhouse.io");
-        user.setPassword("cjaiU8CV");
     }
 
     public void login() throws Exception {

@@ -15,10 +15,10 @@
             <p:growl id="msgs"/>
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel value="Email:"/>
-                <p:inputText value="demo@financialhouse.io" required="true"/>
+                <p:inputText value="#{loginBean.user.email}" required="true"/>
 
                 <h:outputLabel value="Password:"/>
-                <p:inputText value="cjaiU8CV" required="true"/>
+                <p:inputText value="#{loginBean.user.password}" required="true"/>
                 <p:commandButton value="Giriş Yap" actionListener="#{loginBean.login}" update="formId,msgs"/>
             </h:panelGrid>
         </p:panel>

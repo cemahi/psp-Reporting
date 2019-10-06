@@ -27,13 +27,11 @@ public class ClientInfoQueryBean {
     @PostConstruct
     public void init() {
         requestDTO = new ClientInfoRequest();
-        requestDTO.setTransactionId("1011028-1539357144-1293");
     }
 
     public void inquiry() {
         hashedEmail = (String) FacesContextUtil.getFromSession("email");
         String token = (String) FacesContextUtil.getFromSession("token");
-        //String token2 = cacheManagementService.findTokenByUserName(hashedEmail);
         requestDTO.setToken(token);
         transactionInfoResponce = RequestServiceFactory.getInstance().getRequestFactory("txInfo", transactionService).sendRequest(requestDTO);
 

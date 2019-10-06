@@ -1,5 +1,19 @@
 package clearkode.enums;
 
 public enum FilterField {
-    //"Transaction UUID", "Customer Email", "Reference No", "Custom Data", "Card PAN"
+    TransactionUUID("Transaction UUID"),
+    CustomerEmail("Customer Email"),
+    ReferenceNo("Reference No"),
+    CustomData("Custom Data"),
+    CardPAN("Card PAN");
+
+    private final String text;
+
+    FilterField(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
 }
