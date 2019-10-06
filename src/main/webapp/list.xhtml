@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+    <h:form id="formId">
+        <p:growl id="msgs"/>
+        <p:menubar>
+            <p:menuitem value="First Report" url="dashBoard.jsf" icon="pi pi-times"/>
+            <p:menuitem value="ClientInfo" url="clientInfo.jsf" icon="pi pi-times"/>
+            <p:menuitem value="Transaction" url="transaction.jsf" icon="pi pi-times"/>
+            <p:menuitem value="List" url="list.jsf" icon="pi pi-times"/>
+
+            <f:facet name="options">
+                <p:commandButton value="Logout" actionListener="#{listBean.logOut}" icon="pi pi-home"/>
+            </f:facet>
+        </p:menubar>
+        <p:panel id="panel" header="Welcome" style="margin-bottom:10px;">
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel value="Start Date :" required="true" requiredMessage="Plase enter Start Date"/>
+                <p:calendar value="#{listBean.fromDate}"/>
+
+                <h:outputLabel value="End Date :"/>
+                <p:calendar value="#{listBean.toDate}" required="true" requiredMessage="Plase enter End Date"/>
+
+                <p:outputLabel value="Operation Type"/>
+                <p:selectOneMenu value="#{listBean.selectedOperation}">
+                    <f:selectItem itemValue="" itemLabel="Select"/>
+                    <f:selectItems value="#{listBean.operationTypeList}"/>
+                    <f:attribute name="selectItems" value="#{listBean.operationTypeList}"/>
+                    <f:attribute name="labelNameForMessage" value="Operation Type"/>
+                    <f:attribute name="fieldRequired" value="false"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Status Type"/>
+                <p:selectOneMenu value="#{listBean.selectedStatus}">
+                    <f:selectItem itemValue="" itemLabel="Select"/>
+                    <f:selectItems value="#{listBean.statusTypeList}"/>
+                    <f:attribute name="selectItems" value="#{listBean.statusTypeList}"/>
+                    <f:attribute name="labelNameForMessage" value="Status Type"/>
+                    <f:attribute name="fieldRequired" value="false"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Payment Method"/>
+                <p:selectOneMenu value="#{listBean.selectedPaymentMethod}">
+                    <f:selectItem itemValue="" itemLabel="Select"/>
+                    <f:selectItems value="#{listBean.paymentMethodList}"/>
+                    <f:attribute name="selectItems" value="#{listBean.paymentMethodList}"/>
+                    <f:attribute name="labelNameForMessage" value="Payment Method"/>
+                    <f:attribute name="fieldRequired" value="false"/>
+                </p:selectOneMenu>
+
+                <p:commandButton actionListener="#{listBean.inquiry}" update="msgs,table1,table2" value="Search"/>
+
+                <p:commandButton actionListener="#{listBean.doneStatusError}" update="formId,msgs,table1,table2" value="Search In Refundable"/>
+            </h:panelGrid>
+
+            <p:dataTable id="table1" value="#{listBean.transactionDetails}" rendered="#{!listBean.statusError}"
+                         var="dto" emptyMessage="Not Found"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rows="50" rowsPerPageTemplate="50" paginator="true">
+                <p:column headerText="Number">
+                    <h:outputText value="#{dto.customerInfo.number}"/>
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{dto.customerInfo.email}"/>
+                </p:column>
+                <p:column headerText="Billing FirstName">
+                    <h:outputText value="#{dto.customerInfo.billingFirstName}"/>
+                </p:column>
+                <p:column headerText="Billing LastName">
+                    <h:outputText value="#{dto.customerInfo.billingLastName}"/>
+                </p:column>
+                <p:column headerText="Fx Orginal Amount">
+                    <h:outputText value="#{dto.merchant.originalAmount}"/>
+                </p:column>
+                <p:column headerText="Fx Orginal Currency">
+                    <h:outputText value="#{dto.merchant.originalCurrency}"/>
+                </p:column>
+                <p:column headerText="Merchant Id">
+                    <h:outputText value="#{dto.merchant.id}"/>
+                </p:column>
+                <p:column headerText="Merchant Name">
+                    <h:outputText value="#{dto.merchant.name}"/>
+                </p:column>
+                <p:column headerText="ipn received">
+                    <h:outputText value="#{dto.ipn.received}"/>
+                </p:column>
+                <p:column headerText="Reference No">
+                    <h:outputText value="#{dto.transaction.merchant.referenceNo}"/>
+                </p:column>
+                <p:column headerText="status">
+                    <h:outputText value="#{dto.transaction.merchant.status}"/>
+                </p:column>
+                <p:column headerText="message">
+                    <h:outputText value="#{dto.transaction.merchant.message}"/>
+                </p:column>
+                <p:column headerText="Create Date">
+                    <h:outputText value="#{dto.transaction.merchant.created_at}"/>
+                </p:column>
+                <p:column headerText="TransactionId">
+                    <h:outputText value="#{dto.transaction.merchant.transactionId}"/>
+                </p:column>
+
+                <p:column headerText="Acquirer Id">
+                    <h:outputText value="#{dto.acquirer.id}"/>
+                </p:column>
+                <p:column headerText="Acquirer Name">
+                    <h:outputText value="#{dto.acquirer.name}"/>
+                </p:column>
+                <p:column headerText="Acquirer Code">
+                    <h:outputText value="#{dto.acquirer.code}"/>
+                </p:column>
+				<p:column headerText="Acquirer type">
+					<h:outputText value="#{dto.acquirer.type}"/>
+				</p:column>
+
+				<p:column headerText="Refundable">
+					<h:outputText value="#{dto.refundable}"/>
+				</p:column>
+            </p:dataTable>
+
+
+            <p:dataTable id="table2" value="#{listBean.errorTransactionDetails}" rendered="#{listBean.statusError}"
+                         var="dto" emptyMessage="Not Found"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rows="50" rowsPerPageTemplate="50" paginator="true">
+                <p:column headerText="Number">
+                    <h:outputText value="#{dto.customerInfo.number}"/>
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{dto.customerInfo.email}"/>
+                </p:column>
+                <p:column headerText="Billing FirstName">
+                    <h:outputText value="#{dto.customerInfo.billingFirstName}"/>
+                </p:column>
+                <p:column headerText="Billing LastName">
+                    <h:outputText value="#{dto.customerInfo.billingLastName}"/>
+                </p:column>
+                <p:column headerText="Fx Orginal Amount">
+                    <h:outputText value="#{dto.merchant.originalAmount}"/>
+                </p:column>
+                <p:column headerText="Fx Orginal Currency">
+                    <h:outputText value="#{dto.merchant.originalCurrency}"/>
+                </p:column>
+                <p:column headerText="Merchant Id">
+                    <h:outputText value="#{dto.merchant.id}"/>
+                </p:column>
+                <p:column headerText="Merchant Name">
+                    <h:outputText value="#{dto.merchant.name}"/>
+                </p:column>
+                <p:column headerText="ipn received">
+                    <h:outputText value="#{dto.ipn.received}"/>
+                </p:column>
+                <p:column headerText="Reference No">
+                    <h:outputText value="#{dto.transaction.merchant.referenceNo}"/>
+                </p:column>
+                <p:column headerText="status">
+                    <h:outputText value="#{dto.transaction.merchant.status}"/>
+                </p:column>
+                <p:column headerText="message">
+                    <h:outputText value="#{dto.transaction.merchant.message}"/>
+                </p:column>
+                <p:column headerText="Create Date">
+                    <h:outputText value="#{dto.transaction.merchant.created_at}"/>
+                </p:column>
+                <p:column headerText="TransactionId">
+                    <h:outputText value="#{dto.transaction.merchant.transactionId}"/>
+                </p:column>
+
+                <p:column headerText="Acquirer Id">
+                    <h:outputText value="#{dto.acquirer.id}"/>
+                </p:column>
+                <p:column headerText="Acquirer Name">
+                    <h:outputText value="#{dto.acquirer.name}"/>
+                </p:column>
+                <p:column headerText="Acquirer Code">
+                    <h:outputText value="#{dto.acquirer.code}"/>
+                </p:column>
+                <p:column headerText="Acquirer type">
+                    <h:outputText value="#{dto.acquirer.type}"/>
+                </p:column>
+
+                <p:column headerText="Refundable">
+                    <h:outputText value="#{dto.refundable}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

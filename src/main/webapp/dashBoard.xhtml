@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+</h:head>
+<h:body>
+	<h:form id="formId">
+		<p:menubar>
+			<p:menuitem value="First Report" url="dashBoard.jsf" icon="pi pi-times" />
+			<p:menuitem value="ClientInfo" url="clientInfo.jsf" icon="pi pi-times" />
+			<p:menuitem value="Transaction" url="transaction.jsf" icon="pi pi-times" />
+			<p:menuitem value="List" url="list.jsf" icon="pi pi-times" />
+
+			<f:facet name="options">
+				<p:commandButton value="Logout" actionListener="#{dashBoardBean.logOut}"  icon="pi pi-home" />
+			</f:facet>
+		</p:menubar>
+		<p:panel id="panel" header="Welcome" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Start Date :"/>
+				<p:calendar value="#{dashBoardBean.fromDate}"/>
+
+				<h:outputLabel value="End Date :"/>
+				<p:calendar value="#{dashBoardBean.toDate}"/>
+
+				<p:commandButton actionListener="#{dashBoardBean.inquiry}" update="table1" value="Search"/>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="panel2" header="dashBoard">
+			<p:dataTable id="table1" emptyMessage="Not Found" var="dto"
+						 value="#{dashBoardBean.transactionDetails}" paginator="true" rows="20"
+						 tableStyle="font-size: 11px;color:black;">
+				<p:column headerText="Count">
+					<h:outputText value="#{dto.count}"/>
+				</p:column>
+				<p:column headerText="Total">
+					<h:outputText value="#{dto.total}"/>
+				</p:column>
+				<p:column headerText="Currency">
+					<h:outputText value="#{dto.currency}"/>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

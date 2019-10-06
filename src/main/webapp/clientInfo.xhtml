@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form id="formId">
+        <p:menubar>
+            <p:menuitem value="First Report" url="dashBoard.jsf" icon="pi pi-times" />
+            <p:menuitem value="ClientInfo" url="clientInfo.jsf" icon="pi pi-times" />
+            <p:menuitem value="Transaction" url="transaction.jsf" icon="pi pi-times" />
+            <p:menuitem value="List" url="list.jsf" icon="pi pi-times" />
+
+            <f:facet name="options">
+                <p:commandButton value="Logout" actionListener="#{clientInfoBean.logOut}" icon="pi pi-home" />
+            </f:facet>
+        </p:menubar>
+
+        <p:panel id="panel" header="Welcome" style="margin-bottom:10px;">
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel value="TransactionId :"/>
+                <p:inputText value="#{clientInfoBean.requestDTO.transactionId}" required="true"/>
+
+                <p:commandButton actionListener="#{clientInfoBean.inquiry}" update="panel2" value="Search"/>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="panel2" header="ClientInfo">
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel value="Id:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.id}"/>
+
+                <h:outputLabel value="Create Date:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.created_at}"/>
+
+                <h:outputLabel value="Update Date:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.updated_at}"/>
+
+                <h:outputLabel value="Delete Date:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.deleted_at}"/>
+
+                <h:outputLabel value="Number:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.number}"/>
+
+                <h:outputLabel value="Expiry Month:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.expiryMonth}"/>
+
+                <h:outputLabel value="Start Month:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.startMonth}"/>
+
+                <h:outputLabel value="Start Year:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.startYear}"/>
+
+                <h:outputLabel value="Issue Number:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.issueNumber}"/>
+
+                <h:outputLabel value="Email:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.email}"/>
+
+                <h:outputLabel value="Birtdhay:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.birthday}"/>
+
+                <h:outputLabel value="Gender:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.gender}"/>
+
+                <h:outputLabel value="Billing Title:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingTitle}"/>
+
+                <h:outputLabel value="Billing FirstName:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingFirstName}"/>
+
+                <h:outputLabel value="Billing LastName:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingLastName}"/>
+
+                <h:outputLabel value="Billing Company:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingCompany}"/>
+
+                <h:outputLabel value="Billing Address1:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingAddress1}"/>
+
+                <h:outputLabel value="Billing Address2:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingAddress2}"/>
+
+                <h:outputLabel value="Billing City:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingCity}"/>
+
+                <h:outputLabel value="Billing Postcode:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingPostcode}"/>
+
+                <h:outputLabel value="Billing State:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingState}"/>
+
+                <h:outputLabel value="Billing Country:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingCountry}"/>
+
+                <h:outputLabel value="Billing Phone:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingPhone}"/>
+
+                <h:outputLabel value="Billing Fax:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.billingFax}"/>
+
+                <h:outputLabel value="Shipping Title:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingTitle}"/>
+
+                <h:outputLabel value="Shipping FirstName:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingFirstName}"/>
+
+                <h:outputLabel value="Shipping LastName:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingLastName}"/>
+
+                <h:outputLabel value="Shipping Company:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingCompany}"/>
+
+                <h:outputLabel value="Shipping Address1:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingAddress1}"/>
+
+                <h:outputLabel value="Shipping Address2:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingAddress2}"/>
+
+                <h:outputLabel value="Shipping City:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingCity}"/>
+
+                <h:outputLabel value="Shipping Postcode:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingPostcode}"/>
+
+                <h:outputLabel value="Shipping State:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingState}"/>
+
+                <h:outputLabel value="Shipping Country:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingCountry}"/>
+
+                <h:outputLabel value="Shipping Phone:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingPhone}"/>
+
+                <h:outputLabel value="Shipping Fax:"/>
+                <h:outputLabel value="#{clientInfoBean.customerInfo.shippingFax}"/>
+
+
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
