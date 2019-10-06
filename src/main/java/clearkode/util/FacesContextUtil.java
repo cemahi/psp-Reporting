@@ -16,8 +16,4 @@ public class FacesContextUtil {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         return session.getAttribute(name);
     }
-
-    public static HttpServletRequest getHttpServletRequest() {
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-    }
 }

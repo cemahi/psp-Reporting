@@ -49,7 +49,5 @@ public class TlsUtil extends RestTemplate {
             setRequestFactory(factory);
         } catch (Exception e) {
         }
-
-
     }
 }

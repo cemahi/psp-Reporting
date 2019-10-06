@@ -2,6 +2,7 @@ package test;
 
 import clearkode.entity.login.LoginResponseDTO;
 import clearkode.entity.login.User;
+import clearkode.service.CacheManagementService;
 import clearkode.service.LoginService;
 import clearkode.service.impl.CacheManagementServiceImpl;
 import clearkode.util.RequestUtil;
@@ -19,8 +20,6 @@ public class LoginTest {
     CacheManagementServiceImpl cacheManagementService;
     @Mock
     LoginService loginService;
-    @Mock
-    RequestUtil requestUtil;
 
 
     @Before
@@ -31,8 +30,8 @@ public class LoginTest {
 
     @Test
     public void addCache() {
-        cacheManagementService.addUserToken("user@user.com", "tokencase1");
-        Assert.assertEquals("tokencase1", cacheManagementService.findTokenByUserName("user@user.com"));
+        cacheManagementService.addUserToken("user@user7.com", "tokencase1");
+        Assert.assertEquals("tokencase1", cacheManagementService.findTokenByUserName("user@user7.com"));
     }
 
     @Test
